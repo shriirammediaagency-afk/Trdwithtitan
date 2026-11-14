@@ -1,106 +1,457 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Free Market Education – Start Today</title>
-  <meta name="description" content="100% free stock market education. Learn chart reading, technical analysis, and risk management. No buy/sell tips. For learning purpose only.">
-  <link rel="canonical" href="https://example.com/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trade With Titan™</title>
 
-  <!-- Performance -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet">
-
-  <!-- Favicons (optional) -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Free Market Education – Start Today">
-  <meta property="og:description" content="Learn charts & risk management. No buy/sell tips. 100% educational.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://example.com/">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1600&auto=format&fit=crop">
-
-  <!-- Minimal CSS (inline for speed) -->
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '3049145088754906');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=3049145088754906&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+  
   <style>
-    :root{
-      --bg1:#0c0c1d;
-      --bg2:#1a1a2b;
-      --brand: #ff6699;
-      --brand-2:#00f0ff;
-      --text:#ffffff;
-      --muted:#b5b5c3;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
-    body{
-      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text);
-      background:
-        linear-gradient(135deg, rgba(0,0,0,.45), rgba(0,0,0,.45)),
-        url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1600&auto=format&fit=crop') no-repeat center/cover fixed;
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      min-height:100vh;
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #ffffff;
+      background-color: #03080c;
+      position: relative;
+      overflow-x: hidden;
+      padding: 20px 12px;
     }
-    .container{
-      max-width:520px; margin:0 auto; padding:24px 18px; text-align:center; min-height:100vh; display:flex; flex-direction:column; justify-content:center;
-      backdrop-filter: saturate(130%);
+
+    /* Animated Background Container */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
     }
-    .badge{display:inline-block; font-size:.78rem; padding:6px 10px; border:1px solid #2a2a3a; border-radius:999px; color:#d6eaff; background:rgba(0,240,255,.08); margin-bottom:14px}
-    h1{font-size:1.9rem; line-height:1.2; margin:6px 0 10px; background:linear-gradient(90deg,var(--brand-2),var(--brand)); -webkit-background-clip:text; background-clip:text; color:transparent;}
-    .sub{font-size:1rem; color:var(--muted); margin:0 auto 16px; max-width:36ch}
-    .pill{
-      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:rgba(0,255,153,.07); border:1px dashed rgba(0,255,153,.35); color:#d8ffe9; font-size:.9rem; margin:6px 0 18px;
+
+    /* Grid Line Movement */
+    .grid-overlay {
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      background-image: 
+        linear-gradient(rgba(0, 255, 136, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 136, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: gridMove 20s linear infinite;
     }
-    ul.bullets{list-style:none; padding:0; margin:0 0 18px}
-    ul.bullets li{margin:8px 0; color:#e9eef9}
-    .cta{
-      display:inline-block; text-decoration:none; background:var(--brand); color:#041b14; padding:14px 18px; font-weight:700; border-radius:12px; box-shadow:0 0 0 0 rgba(0,255,153,.6); transform:translateZ(0);
-      transition:transform .15s ease;
-      animation:pulse 1.6s infinite;
+
+    @keyframes gridMove {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(40px); }
     }
-    .cta:active{transform:scale(.98)}
-    @keyframes pulse{
-      0%{box-shadow:0 0 0 0 rgba(0,255,153,.55)}
-      70%{box-shadow:0 0 0 20px rgba(0,255,153,0)}
-      100%{box-shadow:0 0 0 0 rgba(0,255,153,0)}
+
+    /* Wave Line Animation */
+    .chart-wave {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0.4;
     }
-    .fineprint{font-size:.86rem; color:var(--muted); margin:18px auto 0; max-width:44ch}
-    .disclaimer{font-size:.78rem; color:#9aa4b2; margin:18px auto 0; max-width:50ch}
-    .safe{display:flex; align-items:center; justify-content:center; gap:8px; margin-top:14px; color:#a1ffd6; font-size:.9rem}
-    .shield{width:18px; height:18px; display:inline-block; border-radius:4px; background:linear-gradient(135deg,#0df,#0f9)}
-    footer{opacity:.8; margin-top:22px; font-size:.78rem; color:#9aa4b2}
+
+    .wave-path {
+      fill: none;
+      stroke: #ff0055;
+      stroke-width: 3;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: dash 4s ease-in-out infinite alternate, glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes dash {
+      from { stroke-dashoffset: 1000; }
+      to { stroke-dashoffset: 0; }
+    }
+
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 2px #ff0055); }
+      to { filter: drop-shadow(0 0 8px #ff0055); }
+    }
+
+    /* Pulsing Green Candlesticks */
+    .candlestick {
+      animation: pulseBar 1.5s infinite alternate ease-in-out;
+    }
+
+    @keyframes pulseBar {
+      0% { opacity: 0.3; transform: scaleY(0.95); }
+      100% { opacity: 0.7; transform: scaleY(1.05); }
+    }
+
+    /* Layer Container Styling */
+    .container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 410px;
+      padding: 24px 18px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(3, 8, 12, 0.85);
+      backdrop-filter: blur(8px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      margin-bottom: 15px;
+    }
+
+    .main-title {
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .logo-container {
+      margin-bottom: 12px;
+    }
+
+    .logo-circle {
+      width: 145px;
+      height: 145px;
+      border-radius: 50%;
+      border: 3.5px solid #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #000000;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+    }
+
+    .logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .timer {
+      font-size: 90px;
+      font-weight: 900;
+      color: #00e611;
+      line-height: 1;
+      margin: 8px 0 22px 0;
+      text-shadow: 0 0 20px rgba(0, 230, 17, 0.6);
+    }
+
+    .features-list {
+      list-style: none;
+      width: 100%;
+      margin-top: 20px;
+      margin-bottom: 24px;
+    }
+
+    .features-list li {
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .features-list .sub-heading {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      color: #d1d5db;
+      margin-top: -4px;
+      margin-bottom: 12px;
+    }
+
+    .features-list .highlight-text {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .promo-banner {
+      border: 1.5px solid #ff0000;
+      color: #ffffff;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 9px 12px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    .promo-banner a {
+      color: #ff4d4d;
+      text-decoration: underline;
+    }
+
+    .cta-button {
+      display: block;
+      width: 100%;
+      background-color: #00ff1a;
+      color: #000000;
+      font-size: 22px;
+      font-weight: 900;
+      text-decoration: none;
+      padding: 16px 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 25px rgba(0, 255, 26, 0.6);
+      cursor: pointer;
+      border: none;
+      transition: transform 0.1s ease;
+    }
+
+    .cta-button:active {
+      transform: scale(0.98);
+    }
+
+    /* Footer Links */
+    .footer-links {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: #888;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: #00ff1a;
+    }
+
+    /* Meta Compliance Disclaimer */
+    .meta-disclaimer {
+      position: relative;
+      z-index: 2;
+      max-width: 410px;
+      text-align: center;
+      font-size: 10px;
+      line-height: 1.4;
+      color: #6b7280;
+      padding: 0 8px;
+    }
+
+    /* Modals / Popups */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 10;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: #0b141a;
+      border: 1px solid #00ff1a;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 400px;
+      width: 100%;
+      color: #ddd;
+      position: relative;
+      text-align: left;
+    }
+
+    .modal-content h3 {
+      color: #00ff1a;
+      margin-bottom: 10px;
+    }
+
+    .modal-content p {
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      color: #fff;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <main class="container">
-    <span class="badge">100% Educational • Policy Safe</span>
-    <h1>Free Market Education – Start Today</h1>
-    <p class="sub">Learn index behaviour & risk management</p>
 
-    <div class="pill">🚫 No Buy/Sell Tips • ✅ For Learning Purpose Only</div>
+  <!-- Background Animation -->
+  <div class="bg-animation">
+    <div class="grid-overlay"></div>
+    
+    <svg class="chart-wave" viewBox="0 0 400 800" preserveAspectRatio="none">
+      <g class="candlestick" style="animation-delay: 0s;">
+        <rect x="60" y="250" width="10" height="150" fill="#00e611" />
+        <line x1="65" y1="200" x2="65" y2="430" stroke="#00e611" stroke-width="2" />
+      </g>
 
-    <ul class="bullets" aria-label="What you'll learn">
-      <li>• Chart basics & risk rules (no return promises)</li>
-      <li>• How to read trends without speculation</li>
-      <li>• Market discipline & common mistakes</li>
+      <g class="candlestick" style="animation-delay: 0.5s;">
+        <rect x="180" y="380" width="10" height="200" fill="#00e611" />
+        <line x1="185" y1="320" x2="185" y2="610" stroke="#00e611" stroke-width="2" />
+      </g>
+
+      <g class="candlestick" style="animation-delay: 1s;">
+        <rect x="300" y="180" width="10" height="280" fill="#00e611" />
+        <line x1="305" y1="120" x2="305" y2="500" stroke="#00e611" stroke-width="2" />
+      </g>
+
+      <path class="wave-path" d="M 0 550 Q 80 300, 160 500 T 320 250 T 400 150" />
+      
+      <text x="280" y="220" fill="#ffffff" opacity="0.1" font-size="32" font-weight="bold">22.10</text>
+      <text x="70" y="680" fill="#ffffff" opacity="0.1" font-size="32" font-weight="bold">10.75</text>
+    </svg>
+  </div>
+
+  <!-- MAIN LANDING PAGE CONTAINER -->
+  <div class="container">
+    <h1 class="main-title">Trade With Titan™</h1>
+
+    <div class="logo-container">
+      <div class="logo-circle">
+        <img src="trade2win logo.jpg" alt="Trade With Titan™ Logo" class="logo-img">
+      </div>
+    </div>
+
+    <div class="timer" id="countdown">5</div>
+    
+    <a href="https://t.me/+Wd47L1i8qFg3MTY1" class="cta-button" target="_blank">
+      JOIN FREE CHANNEL 🚀
+    </a>
+
+    <ul class="features-list">
+      <li>✅ SMC, Gold Forex, BTC Setups 🏆</li>
+      <li class="sub-heading">TODAY'S MARKET RESULTS</li>
+      <li>✅ Smart money Strategies $ tips</li>
+      <li style="margin-top: 6px;">🏆</li>
+      <li>✅ 5/5 EXPERT TRADING INSIGHTS TODAY</li>
+      <li class="highlight-text">Risk Management Guidance 🏆</li>
     </ul>
 
-    <!-- CTA goes to a page-specific bridge -->
-    <a class="cta" href="bridge-lp96.html" rel="nofollow">Start Learning</a>
+    <div class="promo-banner">
+      📢 PAID PROMOTION: <a href="https://t.me/+JP96Y2n0U8xiZWI1" target="_blank">@Digital Ads Experts</a>
+    </div>
 
-    <div class="safe"><span class="shield" aria-hidden="true"></span> Ad Policy Friendly Content</div>
+  </div>
 
-    <p class="fineprint">We focus on concepts & frameworks suitable for beginners.</p>
-    <p class="disclaimer"><em>This website is for educational purposes only. We do not provide investment, trading, or financial advice.</em></p>
+  <!-- Footer Info Links -->
+  <div class="footer-links">
+    <a href="javascript:void(0)" onclick="openModal('modal-about')">About Us</a> | 
+    <a href="javascript:void(0)" onclick="openModal('modal-terms')">Terms</a> | 
+    <a href="javascript:void(0)" onclick="openModal('modal-disclaimer')">Disclaimer</a> | 
+    <a href="javascript:void(0)" onclick="openModal('modal-contact')">Contact Us</a>
+  </div>
 
-    <footer>© <span id="y"></span> Market Basics Learning Hub</footer>
-  </main>
+  <!-- Meta Ads Disclaimer -->
+  <div class="meta-disclaimer">
+    <strong>Disclaimer:</strong> This site is not a part of the Facebook™ website or Meta Platforms, Inc. Additionally, this site is NOT endorsed by Facebook™ or Meta™ in any way. FACEBOOK™ is a trademark of Meta Platforms, Inc. All content shared is strictly for educational purposes only and does not constitute financial or investment advice.
+  </div>
+
+  <!-- MODALS / POPUPS -->
+  <div class="modal" id="modal-about">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('modal-about')">&times;</span>
+      <h3>About Us</h3>
+      <p>Trade With Titan™ provides expert market insights, Smart Money Concept (SMC) setups, and educational tips for Forex, Gold, and BTC traders worldwide.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-terms">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('modal-terms')">&times;</span>
+      <h3>Terms & Conditions</h3>
+      <p>By using our services, you agree that trading carries risks. All predictions and setups shared are for educational purposes only and not financial advice.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-disclaimer">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('modal-disclaimer')">&times;</span>
+      <h3>Disclaimer</h3>
+      <p>Trading Forex, Crypto, and Stocks involves high risk. Never risk money you cannot afford to lose. Past performance does not guarantee future results.</p>
+      <p><strong>Meta Disclaimer:</strong> This site is not a part of the Facebook™ website or Meta Platforms, Inc. Additionally, this site is NOT endorsed by Facebook™ or Meta™ in any way. FACEBOOK™ is a trademark of Meta Platforms, Inc.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-contact">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('modal-contact')">&times;</span>
+      <h3>Contact Us</h3>
+      <p>For promos, support, or inquiries, reach out to us via Telegram support or through our official promotion partner link above.</p>
+    </div>
+  </div>
 
   <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
+    // Countdown timer auto-starts on page load
+    window.onload = function() {
+      startTimer();
+    };
+
+    function startTimer() {
+      let timeLeft = 5;
+      const timerElement = document.getElementById('countdown');
+
+      const interval = setInterval(() => {
+        timeLeft--;
+        if (timeLeft >= 0) {
+          timerElement.textContent = timeLeft;
+        } else {
+          clearInterval(interval);
+        }
+      }, 1000);
+    }
+
+    function openModal(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
   </script>
+
 </body>
 </html>
