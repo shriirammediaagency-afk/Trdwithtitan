@@ -5,23 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trade With Titan™</title>
 
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1389054069755611');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1389054069755611&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+  <!-- Meta Pixel Code (Initialized Only - Fires on Verified Human Activity) -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1389054069755611');
+  </script>
+  <!-- End Meta Pixel Code -->
   
   <style>
     * {
@@ -229,6 +225,7 @@ src="https://www.facebook.com/tr?id=1389054069755611&ev=PageView&noscript=1"
       cursor: pointer;
       border: none;
       transition: transform 0.1s ease;
+      user-select: none;
     }
 
     .cta-button:active {
@@ -358,7 +355,18 @@ src="https://www.facebook.com/tr?id=1389054069755611&ev=PageView&noscript=1"
 
     <div class="timer" id="countdown">5</div>
     
-    <a href="https://t.me/+GBNTtEonacY1MzY9" class="cta-button" target="_blank">
+    <!-- Hidden Honeypot Link (Bot Trap - Invisible to Humans) -->
+    <a href="#bot-trap" id="botTrapLink" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;">Join Now</a>
+
+    <!-- CTA Button with Fake Click Detector -->
+    <a 
+      id="mainTelegramCta"
+      href="https://t.me/+GBNTtEonacY1MzY9" 
+      class="cta-button" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      onclick="return handleVerifiedCtaClick(event);"
+    >
       JOIN FREE CHANNEL 🚀
     </a>
 
@@ -372,7 +380,7 @@ src="https://www.facebook.com/tr?id=1389054069755611&ev=PageView&noscript=1"
     </ul>
 
     <div class="promo-banner">
-      📢 PAID PROMOTION: <a href="https://t.me/+JP96Y2n0U8xiZWI1" target="_blank">@Digital Ads Experts</a>
+      📢 PAID PROMOTION: <a href="https://t.me/+JP96Y2n0U8xiZWI1" target="_blank" rel="noopener noreferrer">@Digital Ads Experts</a>
     </div>
 
   </div>
@@ -425,7 +433,83 @@ src="https://www.facebook.com/tr?id=1389054069755611&ev=PageView&noscript=1"
   </div>
 
   <script>
-    // Countdown timer auto-starts on page load
+    // ==========================================
+    // 1. FAKE CLICK & BOT DETECTOR (MOBILE + DESKTOP SAFE)
+    // ==========================================
+    const pageLoadTime = Date.now();
+    let humanSignals = 0;
+    let isBotFlagged = false;
+    let leadAlreadyTracked = false;
+    let pageViewTracked = false;
+
+    // Detect Headless Browsers / Crawlers / Automation Bots
+    if (
+      navigator.webdriver ||
+      !navigator.languages ||
+      navigator.languages.length === 0 ||
+      /HeadlessChrome|PhantomJS|SlimerJS|bot|crawler|spider|preview|facebookexternalhit|Facebot/i.test(navigator.userAgent)
+    ) {
+      isBotFlagged = true;
+    }
+
+    // Track Genuine Human Interaction (Touch, Scroll, Pointer/Mouse)
+    function recordHumanActivity(e) {
+      if (e && e.isTrusted) {
+        humanSignals++;
+        if (!isBotFlagged && !pageViewTracked && typeof fbq === 'function') {
+          fbq('track', 'PageView');
+          pageViewTracked = true;
+        }
+      }
+    }
+
+    window.addEventListener('touchstart', recordHumanActivity, { passive: true });
+    window.addEventListener('pointerdown', recordHumanActivity, { passive: true });
+    window.addEventListener('mousemove', recordHumanActivity, { passive: true });
+    window.addEventListener('scroll', recordHumanActivity, { passive: true });
+
+    // Hidden Honeypot Trap for Bots
+    const botTrap = document.getElementById('botTrapLink');
+    if (botTrap) {
+      botTrap.addEventListener('click', function(e) {
+        e.preventDefault();
+        isBotFlagged = true;
+      });
+    }
+
+    // Verify Genuine Human Click before firing Meta Pixel Lead
+    function isGenuineHumanClick(event) {
+      const timeOnPageMs = Date.now() - pageLoadTime;
+
+      if (isBotFlagged) return false;
+      if (!event || event.isTrusted === false) return false;
+      if (timeOnPageMs < 1200) return false;
+
+      const hasValidPointer = (event.clientX > 0 || event.clientY > 0 || event.pointerType === 'touch');
+      if (!hasValidPointer && humanSignals < 1) return false;
+
+      return true;
+    }
+
+    function handleVerifiedCtaClick(event) {
+      if (isGenuineHumanClick(event)) {
+        if (!leadAlreadyTracked && typeof fbq === 'function') {
+          if (!pageViewTracked) {
+            fbq('track', 'PageView');
+            pageViewTracked = true;
+          }
+          fbq('track', 'Lead');
+          leadAlreadyTracked = true;
+        }
+      } else {
+        console.warn('Fake/Bot click blocked from Meta Pixel tracking.');
+      }
+      return true;
+    }
+
+    // ==========================================
+    // 2. VISUAL COUNTDOWN TIMER (NO PIXEL TRACKING)
+    // ==========================================
     window.onload = function() {
       startTimer();
     };
@@ -444,6 +528,9 @@ src="https://www.facebook.com/tr?id=1389054069755611&ev=PageView&noscript=1"
       }, 1000);
     }
 
+    // ==========================================
+    // 3. MODAL LOGIC
+    // ==========================================
     function openModal(id) {
       document.getElementById(id).style.display = 'flex';
     }
