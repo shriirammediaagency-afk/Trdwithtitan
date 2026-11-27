@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trade With Titan™</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Trade With Titan™ - Official Trading Community</title>
+  <meta name="description" content="Join Trade With Titan™ free Telegram channel for SMC, Gold Forex, BTC setups, and risk management insights.">
 
-  <!-- Meta Pixel Code (Initialized Only - Fires on Verified Human Activity) -->
+  <!-- Meta Pixel Code (Strict Bot-Filtered Initialization) -->
   <script>
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -15,7 +16,18 @@
   t.src=v;s=b.getElementsByTagName(e)[0];
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '1389054069755611');
+
+  var isAutomatedBot = (
+    navigator.webdriver === true ||
+    !navigator.languages ||
+    navigator.languages.length === 0 ||
+    /bot|crawl|spider|slurp|facebookexternalhit|Facebot|mediapartners|headless|phantom|selenium|puppeteer|playwright|lighthouse/i.test(navigator.userAgent) ||
+    (window.outerWidth === 0 && window.outerHeight === 0)
+  );
+
+  if (!isAutomatedBot) {
+    fbq('init', '1389054069755611');
+  }
   </script>
   <!-- End Meta Pixel Code -->
   
@@ -25,89 +37,40 @@
       padding: 0;
       box-sizing: border-box;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background-color: #03080c;
+      color: #ffffff;
+      overflow-x: hidden;
     }
 
     body {
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      color: #ffffff;
-      background-color: #03080c;
       position: relative;
-      overflow-x: hidden;
-      padding: 20px 12px;
+      padding: 16px 12px 24px;
     }
 
-    /* Animated Background Container */
+    /* Lightweight GPU-Safe Background Grid & Glow */
     .bg-animation {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       z-index: 1;
       pointer-events: none;
-    }
-
-    /* Grid Line Movement */
-    .grid-overlay {
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      top: -50%;
-      left: -50%;
       background-image: 
-        linear-gradient(rgba(0, 255, 136, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 136, 0.05) 1px, transparent 1px);
-      background-size: 40px 40px;
-      animation: gridMove 20s linear infinite;
+        radial-gradient(circle at 50% 15%, rgba(0, 255, 26, 0.12) 0%, transparent 55%),
+        linear-gradient(rgba(0, 255, 136, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 136, 0.04) 1px, transparent 1px);
+      background-size: 100% 100%, 36px 36px, 36px 36px;
     }
 
-    @keyframes gridMove {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(40px); }
-    }
-
-    /* Wave Line Animation */
-    .chart-wave {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      opacity: 0.4;
-    }
-
-    .wave-path {
-      fill: none;
-      stroke: #ff0055;
-      stroke-width: 3;
-      stroke-dasharray: 1000;
-      stroke-dashoffset: 1000;
-      animation: dash 4s ease-in-out infinite alternate, glow 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes dash {
-      from { stroke-dashoffset: 1000; }
-      to { stroke-dashoffset: 0; }
-    }
-
-    @keyframes glow {
-      from { filter: drop-shadow(0 0 2px #ff0055); }
-      to { filter: drop-shadow(0 0 8px #ff0055); }
-    }
-
-    /* Pulsing Green Candlesticks */
-    .candlestick {
-      animation: pulseBar 1.5s infinite alternate ease-in-out;
-    }
-
-    @keyframes pulseBar {
-      0% { opacity: 0.3; transform: scaleY(0.95); }
-      100% { opacity: 0.7; transform: scaleY(1.05); }
-    }
-
-    /* Layer Container Styling */
+    /* Main Container (No heavy backdrop-filter to prevent mobile WebView lag) */
     .container {
       position: relative;
       z-index: 2;
@@ -118,37 +81,36 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: rgba(3, 8, 12, 0.85);
-      backdrop-filter: blur(8px);
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-      margin-bottom: 15px;
+      background: linear-gradient(180deg, #08121a 0%, #04090e 100%);
+      border-radius: 18px;
+      border: 1px solid rgba(0, 255, 26, 0.25);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(0, 255, 26, 0.08);
+      margin-bottom: 14px;
     }
 
     .main-title {
-      font-size: 26px;
+      font-size: 25px;
       font-weight: 900;
-      letter-spacing: 1px;
-      margin-bottom: 16px;
+      letter-spacing: 0.8px;
+      margin-bottom: 14px;
       color: #ffffff;
       text-transform: uppercase;
     }
 
     .logo-container {
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .logo-circle {
-      width: 145px;
-      height: 145px;
+      width: 132px;
+      height: 132px;
       border-radius: 50%;
-      border: 3.5px solid #ffffff;
+      border: 3px solid #00ff1a;
       display: flex;
       align-items: center;
       justify-content: center;
       background-color: #000000;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 0 22px rgba(0, 255, 26, 0.35);
       overflow: hidden;
     }
 
@@ -156,80 +118,104 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
     .timer {
-      font-size: 90px;
+      font-size: 76px;
       font-weight: 900;
       color: #00e611;
       line-height: 1;
-      margin: 8px 0 22px 0;
-      text-shadow: 0 0 20px rgba(0, 230, 17, 0.6);
+      margin: 6px 0 18px 0;
+      text-shadow: 0 0 18px rgba(0, 230, 17, 0.55);
+    }
+
+    /* Protected CTA Button */
+    .cta-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: linear-gradient(180deg, #1aff30 0%, #00e017 100%);
+      color: #000000;
+      font-size: 21px;
+      font-weight: 900;
+      padding: 16px 16px;
+      border-radius: 12px;
+      box-shadow: 0 6px 24px rgba(0, 255, 26, 0.5);
+      cursor: pointer;
+      border: none;
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+      user-select: none;
+      animation: pulseBtn 2s infinite;
+    }
+
+    .cta-button:active {
+      transform: scale(0.97);
+    }
+
+    @keyframes pulseBtn {
+      0%, 100% { box-shadow: 0 4px 20px rgba(0, 255, 26, 0.45); }
+      50%      { box-shadow: 0 6px 32px rgba(0, 255, 26, 0.75); }
     }
 
     .features-list {
       list-style: none;
       width: 100%;
       margin-top: 20px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .features-list li {
-      font-size: 19px;
+      font-size: 18px;
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 11px;
     }
 
     .features-list .sub-heading {
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 800;
       letter-spacing: 0.8px;
-      color: #d1d5db;
+      color: #cbd5e1;
       margin-top: -4px;
       margin-bottom: 12px;
     }
 
     .features-list .highlight-text {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 800;
     }
 
     .promo-banner {
-      border: 1.5px solid #ff0000;
+      border: 1.5px solid #ef4444;
       color: #ffffff;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba(0, 0, 0, 0.75);
       padding: 9px 12px;
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 700;
-      border-radius: 6px;
-      margin-bottom: 10px;
+      border-radius: 8px;
       width: 100%;
     }
 
-    .promo-banner a {
-      color: #ff4d4d;
-      text-decoration: underline;
-    }
-
-    .cta-button {
-      display: block;
-      width: 100%;
-      background-color: #00ff1a;
-      color: #000000;
-      font-size: 22px;
-      font-weight: 900;
-      text-decoration: none;
-      padding: 16px 16px;
-      border-radius: 12px;
-      box-shadow: 0 4px 25px rgba(0, 255, 26, 0.6);
-      cursor: pointer;
+    .promo-banner button {
+      background: none;
       border: none;
-      transition: transform 0.1s ease;
-      user-select: none;
+      color: #ff4d4d;
+      font-size: 13.5px;
+      font-weight: 800;
+      text-decoration: underline;
+      cursor: pointer;
     }
 
-    .cta-button:active {
-      transform: scale(0.98);
+    /* Invisible Honeypot Trap for Scraper Bots */
+    .hp-trap {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
     }
 
     /* Footer Links */
@@ -237,20 +223,23 @@
       position: relative;
       z-index: 2;
       display: flex;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
       justify-content: center;
       font-size: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
+      color: #64748b;
     }
 
-    .footer-links a {
-      color: #888;
-      text-decoration: none;
-      transition: color 0.2s;
+    .footer-links button {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 12px;
+      cursor: pointer;
     }
 
-    .footer-links a:hover {
+    .footer-links button:hover {
       color: #00ff1a;
     }
 
@@ -261,8 +250,8 @@
       max-width: 410px;
       text-align: center;
       font-size: 10px;
-      line-height: 1.4;
-      color: #6b7280;
+      line-height: 1.45;
+      color: #64748b;
       padding: 0 8px;
     }
 
@@ -270,25 +259,22 @@
     .modal {
       display: none;
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      z-index: 10;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.86);
+      z-index: 20;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      padding: 18px;
     }
 
     .modal-content {
       background: #0b141a;
       border: 1px solid #00ff1a;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 20px;
-      max-width: 400px;
+      max-width: 390px;
       width: 100%;
-      color: #ddd;
+      color: #e2e8f0;
       position: relative;
       text-align: left;
     }
@@ -299,49 +285,27 @@
     }
 
     .modal-content p {
-      font-size: 14px;
-      line-height: 1.5;
-      margin-bottom: 15px;
+      font-size: 13.5px;
+      line-height: 1.55;
+      margin-bottom: 12px;
     }
 
     .close-btn {
       position: absolute;
       top: 10px;
-      right: 15px;
-      font-size: 20px;
-      color: #fff;
+      right: 14px;
+      font-size: 22px;
+      color: #ffffff;
+      background: none;
+      border: none;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <!-- Background Animation -->
-  <div class="bg-animation">
-    <div class="grid-overlay"></div>
-    
-    <svg class="chart-wave" viewBox="0 0 400 800" preserveAspectRatio="none">
-      <g class="candlestick" style="animation-delay: 0s;">
-        <rect x="60" y="250" width="10" height="150" fill="#00e611" />
-        <line x1="65" y1="200" x2="65" y2="430" stroke="#00e611" stroke-width="2" />
-      </g>
-
-      <g class="candlestick" style="animation-delay: 0.5s;">
-        <rect x="180" y="380" width="10" height="200" fill="#00e611" />
-        <line x1="185" y1="320" x2="185" y2="610" stroke="#00e611" stroke-width="2" />
-      </g>
-
-      <g class="candlestick" style="animation-delay: 1s;">
-        <rect x="300" y="180" width="10" height="280" fill="#00e611" />
-        <line x1="305" y1="120" x2="305" y2="500" stroke="#00e611" stroke-width="2" />
-      </g>
-
-      <path class="wave-path" d="M 0 550 Q 80 300, 160 500 T 320 250 T 400 150" />
-      
-      <text x="280" y="220" fill="#ffffff" opacity="0.1" font-size="32" font-weight="bold">22.10</text>
-      <text x="70" y="680" fill="#ffffff" opacity="0.1" font-size="32" font-weight="bold">10.75</text>
-    </svg>
-  </div>
+  <!-- Lightweight Background Grid -->
+  <div class="bg-animation"></div>
 
   <!-- MAIN LANDING PAGE CONTAINER -->
   <div class="container">
@@ -349,48 +313,51 @@
 
     <div class="logo-container">
       <div class="logo-circle">
-        <img src="Titan.jpeg" alt="Trade With Titan™ Logo" class="logo-img">
+        <img 
+          src="Titan.jpeg" 
+          alt="Trade With Titan™ Logo" 
+          class="logo-img"
+          onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect width=%22200%22 height=%22200%22 fill=%22%23000000%22/><text x=%2250%25%22 y=%2254%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%2300ff1a%22 font-family=%22sans-serif%22 font-weight=%22bold%22 font-size=%2228%22>TITAN</text></svg>';"
+        >
       </div>
     </div>
 
     <div class="timer" id="countdown">5</div>
     
     <!-- Hidden Honeypot Link (Bot Trap - Invisible to Humans) -->
-    <a href="#bot-trap" id="botTrapLink" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;">Join Now</a>
+    <a href="/bot-trap" rel="nofollow" id="botTrapLink" tabindex="-1" aria-hidden="true" class="hp-trap">Join Now</a>
 
-    <!-- CTA Button with Fake Click Detector -->
-    <a 
+    <!-- Protected CTA Button (No raw Telegram URL for bots to scrape) -->
+    <button 
+      type="button"
       id="mainTelegramCta"
-      href="https://t.me/+GBNTtEonacY1MzY9" 
       class="cta-button" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      onclick="return handleVerifiedCtaClick(event);"
+      onclick="handleVerifiedCtaClick(event, 'main')"
     >
       JOIN FREE CHANNEL 🚀
-    </a>
+    </button>
 
     <ul class="features-list">
       <li>✅ SMC, Gold Forex, BTC Setups 🏆</li>
       <li class="sub-heading">TODAY'S MARKET RESULTS</li>
-      <li>✅ Smart money Strategies $ tips</li>
-      <li style="margin-top: 6px;">🏆</li>
+      <li>✅ Smart money Strategies &amp; tips</li>
+      <li style="margin-top: 4px;">🏆</li>
       <li>✅ 5/5 EXPERT TRADING INSIGHTS TODAY</li>
       <li class="highlight-text">Risk Management Guidance 🏆</li>
     </ul>
 
     <div class="promo-banner">
-      📢 PAID PROMOTION: <a href="https://t.me/+JP96Y2n0U8xiZWI1" target="_blank" rel="noopener noreferrer">@Digital Ads Experts</a>
+      📢 PAID PROMOTION: <button type="button" onclick="handlePromoClick(event)">@Digital Ads Experts</button>
     </div>
 
   </div>
 
   <!-- Footer Info Links -->
   <div class="footer-links">
-    <a href="javascript:void(0)" onclick="openModal('modal-about')">About Us</a> | 
-    <a href="javascript:void(0)" onclick="openModal('modal-terms')">Terms</a> | 
-    <a href="javascript:void(0)" onclick="openModal('modal-disclaimer')">Disclaimer</a> | 
-    <a href="javascript:void(0)" onclick="openModal('modal-contact')">Contact Us</a>
+    <button type="button" onclick="openModal('modal-about')">About Us</button> | 
+    <button type="button" onclick="openModal('modal-terms')">Terms</button> | 
+    <button type="button" onclick="openModal('modal-disclaimer')">Disclaimer</button> | 
+    <button type="button" onclick="openModal('modal-contact')">Contact Us</button>
   </div>
 
   <!-- Meta Ads Disclaimer -->
@@ -399,34 +366,34 @@
   </div>
 
   <!-- MODALS / POPUPS -->
-  <div class="modal" id="modal-about">
+  <div class="modal" id="modal-about" onclick="closeOnBg(event, 'modal-about')">
     <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('modal-about')">&times;</span>
+      <button type="button" class="close-btn" onclick="closeModal('modal-about')">&times;</button>
       <h3>About Us</h3>
       <p>Trade With Titan™ provides expert market insights, Smart Money Concept (SMC) setups, and educational tips for Forex, Gold, and BTC traders worldwide.</p>
     </div>
   </div>
 
-  <div class="modal" id="modal-terms">
+  <div class="modal" id="modal-terms" onclick="closeOnBg(event, 'modal-terms')">
     <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('modal-terms')">&times;</span>
-      <h3>Terms & Conditions</h3>
+      <button type="button" class="close-btn" onclick="closeModal('modal-terms')">&times;</button>
+      <h3>Terms &amp; Conditions</h3>
       <p>By using our services, you agree that trading carries risks. All predictions and setups shared are for educational purposes only and not financial advice.</p>
     </div>
   </div>
 
-  <div class="modal" id="modal-disclaimer">
+  <div class="modal" id="modal-disclaimer" onclick="closeOnBg(event, 'modal-disclaimer')">
     <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('modal-disclaimer')">&times;</span>
+      <button type="button" class="close-btn" onclick="closeModal('modal-disclaimer')">&times;</button>
       <h3>Disclaimer</h3>
       <p>Trading Forex, Crypto, and Stocks involves high risk. Never risk money you cannot afford to lose. Past performance does not guarantee future results.</p>
       <p><strong>Meta Disclaimer:</strong> This site is not a part of the Facebook™ website or Meta Platforms, Inc. Additionally, this site is NOT endorsed by Facebook™ or Meta™ in any way. FACEBOOK™ is a trademark of Meta Platforms, Inc.</p>
     </div>
   </div>
 
-  <div class="modal" id="modal-contact">
+  <div class="modal" id="modal-contact" onclick="closeOnBg(event, 'modal-contact')">
     <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('modal-contact')">&times;</span>
+      <button type="button" class="close-btn" onclick="closeModal('modal-contact')">&times;</button>
       <h3>Contact Us</h3>
       <p>For promos, support, or inquiries, reach out to us via Telegram support or through our official promotion partner link above.</p>
     </div>
@@ -434,109 +401,137 @@
 
   <script>
     // ==========================================
-    // 1. FAKE CLICK & BOT DETECTOR (MOBILE + DESKTOP SAFE)
+    // 1. MULTI-LAYER FAKE CLICK & BOT PROTECTION
     // ==========================================
-    const pageLoadTime = Date.now();
-    let humanSignals = 0;
-    let isBotFlagged = false;
-    let leadAlreadyTracked = false;
-    let pageViewTracked = false;
+    (function() {
+      var pageLoadTime = Date.now();
+      var humanSignals = 0;
+      var isBotFlagged = false;
+      var pageViewTracked = false;
 
-    // Detect Headless Browsers / Crawlers / Automation Bots
-    if (
-      navigator.webdriver ||
-      !navigator.languages ||
-      navigator.languages.length === 0 ||
-      /HeadlessChrome|PhantomJS|SlimerJS|bot|crawler|spider|preview|facebookexternalhit|Facebot/i.test(navigator.userAgent)
-    ) {
-      isBotFlagged = true;
-    }
+      // Encoded Telegram Invite Codes (Prevents scraper bots from pre-fetching URLs)
+      var MAIN_INVITE_B64 = "R0JOVHRFb25hY1kxTXpZOQ=="; // GBNTtEonacY1MzY9
+      var PROMO_INVITE_B64 = "SlA5NlkybjBVOHhpWldJMQ=="; // JP96Y2n0U8xiZWI1
 
-    // Track Genuine Human Interaction (Touch, Scroll, Pointer/Mouse)
-    function recordHumanActivity(e) {
-      if (e && e.isTrusted) {
-        humanSignals++;
-        if (!isBotFlagged && !pageViewTracked && typeof fbq === 'function') {
-          fbq('track', 'PageView');
-          pageViewTracked = true;
+      if (
+        navigator.webdriver === true ||
+        !navigator.languages ||
+        navigator.languages.length === 0 ||
+        /HeadlessChrome|PhantomJS|SlimerJS|bot|crawler|spider|slurp|preview|facebookexternalhit|Facebot|selenium|puppeteer|playwright|lighthouse/i.test(navigator.userAgent) ||
+        (window.outerWidth === 0 && window.outerHeight === 0)
+      ) {
+        isBotFlagged = true;
+      }
+
+      function recordHumanActivity(e) {
+        if (e && e.isTrusted !== false) {
+          humanSignals++;
+          if (!isBotFlagged && !pageViewTracked && typeof fbq === 'function') {
+            fbq('track', 'PageView');
+            pageViewTracked = true;
+          }
         }
       }
-    }
 
-    window.addEventListener('touchstart', recordHumanActivity, { passive: true });
-    window.addEventListener('pointerdown', recordHumanActivity, { passive: true });
-    window.addEventListener('mousemove', recordHumanActivity, { passive: true });
-    window.addEventListener('scroll', recordHumanActivity, { passive: true });
-
-    // Hidden Honeypot Trap for Bots
-    const botTrap = document.getElementById('botTrapLink');
-    if (botTrap) {
-      botTrap.addEventListener('click', function(e) {
-        e.preventDefault();
-        isBotFlagged = true;
+      ['touchstart', 'pointerdown', 'mousemove', 'scroll', 'keydown'].forEach(function(evt) {
+        window.addEventListener(evt, recordHumanActivity, { passive: true });
       });
-    }
 
-    // Verify Genuine Human Click before firing Meta Pixel Lead
-    function isGenuineHumanClick(event) {
-      const timeOnPageMs = Date.now() - pageLoadTime;
+      var botTrap = document.getElementById('botTrapLink');
+      if (botTrap) {
+        botTrap.addEventListener('click', function(e) {
+          e.preventDefault();
+          isBotFlagged = true;
+        });
+      }
 
-      if (isBotFlagged) return false;
-      if (!event || event.isTrusted === false) return false;
-      if (timeOnPageMs < 1200) return false;
+      function isGenuineHumanClick(event) {
+        var timeOnPageMs = Date.now() - pageLoadTime;
 
-      const hasValidPointer = (event.clientX > 0 || event.clientY > 0 || event.pointerType === 'touch');
-      if (!hasValidPointer && humanSignals < 1) return false;
+        if (isBotFlagged) return false;
+        if (!event || event.isTrusted === false) return false;
+        // Block instant bot clicks under 1.1 seconds
+        if (timeOnPageMs < 1100 && humanSignals < 1) return false;
 
-      return true;
-    }
+        return true;
+      }
 
-    function handleVerifiedCtaClick(event) {
-      if (isGenuineHumanClick(event)) {
-        if (!leadAlreadyTracked && typeof fbq === 'function') {
+      function openTelegramSmart(inviteCode) {
+        var appUrl = "tg://join?invite=" + inviteCode;
+        var webUrl = "https://t.me/+" + inviteCode;
+
+        // Try opening native Telegram App first on mobile
+        window.location.href = appUrl;
+
+        // Fallback to web URL if app isn't installed
+        setTimeout(function() {
+          if (!document.hidden) {
+            window.location.assign(webUrl);
+          }
+        }, 750);
+      }
+
+      window.handleVerifiedCtaClick = function(event) {
+        if (event) event.preventDefault();
+
+        if (!isGenuineHumanClick(event)) {
+          return false;
+        }
+
+        // Fire Meta Pixel Lead ONCE per verified human session
+        if (!sessionStorage.getItem('titan_verified_lead') && typeof fbq === 'function') {
+          sessionStorage.setItem('titan_verified_lead', '1');
           if (!pageViewTracked) {
             fbq('track', 'PageView');
             pageViewTracked = true;
           }
-          fbq('track', 'Lead');
-          leadAlreadyTracked = true;
+          fbq('track', 'Lead', {
+            content_name: 'Trade With Titan Channel',
+            status: 'verified_human'
+          });
         }
-      } else {
-        console.warn('Fake/Bot click blocked from Meta Pixel tracking.');
-      }
-      return true;
-    }
+
+        openTelegramSmart(atob(MAIN_INVITE_B64));
+      };
+
+      window.handlePromoClick = function(event) {
+        if (event) event.preventDefault();
+        if (!isGenuineHumanClick(event)) return false;
+        openTelegramSmart(atob(PROMO_INVITE_B64));
+      };
+    })();
 
     // ==========================================
-    // 2. VISUAL COUNTDOWN TIMER (NO PIXEL TRACKING)
+    // 2. VISUAL COUNTDOWN TIMER (NO TRACKING)
     // ==========================================
-    window.onload = function() {
-      startTimer();
-    };
-
-    function startTimer() {
-      let timeLeft = 5;
-      const timerElement = document.getElementById('countdown');
-
-      const interval = setInterval(() => {
+    (function() {
+      var timeLeft = 5;
+      var timerElement = document.getElementById('countdown');
+      var interval = setInterval(function() {
         timeLeft--;
-        if (timeLeft >= 0) {
+        if (timeLeft >= 0 && timerElement) {
           timerElement.textContent = timeLeft;
         } else {
           clearInterval(interval);
         }
       }, 1000);
-    }
+    })();
 
     // ==========================================
     // 3. MODAL LOGIC
     // ==========================================
     function openModal(id) {
-      document.getElementById(id).style.display = 'flex';
+      var el = document.getElementById(id);
+      if (el) el.style.display = 'flex';
     }
 
     function closeModal(id) {
-      document.getElementById(id).style.display = 'none';
+      var el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    }
+
+    function closeOnBg(e, id) {
+      if (e.target.id === id) closeModal(id);
     }
   </script>
 
